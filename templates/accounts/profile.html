@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div ng-app="ProfileApp" ng-controller="ProfileCtrl">
+	<h2>My Profile</h2>
+	<hr/>
+	Username: {{'{{profile.username}'}}}
+	<hr/>
+	Email: {{'{{profile.email}'}}}
+	<hr/>
+	First Name{{'{{profile.first_name}'}}}
+	<hr/>
+	Last Name{{'{{profile.last_name}'}}}
+	<hr/>
+	Staff status{{'{{profile.is_staff}'}}}
+	<hr/>
+	Date Joined{{'{{profile.date_joined}'}}}
+	<hr/>
+	Last Login{{'{{profile.last_login}'}}}
+	<hr/>
+</div>
+<!-- END Container -->
+
+<script type="text/javascript">
+var app = angular.module('ProfileApp', []);
+app.controller('ProfileCtrl', function($scope, $http) {
+    $http.get("/accounts/api/profile")
+    .then(function(response) {
+        $scope.profile = response.data[0];
+        console.log($scope.profile);
+    });
+});
+
+</script>
+
+{% endblock %}

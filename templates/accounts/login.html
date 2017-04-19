@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-us" >
+  <head>
+    <title>Log in | Django site admin</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/login.css" />
+    <script type="text/javascript" src="/static/angular.min.js"></script>
+    <meta name="robots" content="NONE,NOARCHIVE" />
+  </head>
+  <body class=" login" ng-app="LoginApp" ng-controller="LoginCtrl">
+    <!-- Container -->
+    <div id="container">
+      <!-- Header -->
+      <div id="header">
+        <div id="branding">
+          
+          <h1 id="site-name"><a href="/accounts/login/">IPTV administration</a></h1>
+        </div>
+      </div>
+      <!-- END Header -->
+      <!-- Content -->
+      <div id="content" class="colM">
+        <div id="content-main">
+
+          <form action="/accounts/login/" method="post" id="login-form">
+            <div class="form-row">
+              <label class="required" for="id_username">Username:</label>
+              <input autofocus="" id="id_username" maxlength="254" name="username" type="text" required ng-model="user.username" ng-keypress="checkIfEnterKeyWasPressed($event)"/>
+            </div>
+            <div class="form-row">
+              
+              <label class="required" for="id_password">Password:</label>
+              <input id="id_password" name="password" type="password" required ng-model="user.password" ng-keypress="checkIfEnterKeyWasPressed($event)"/>
+            </div>
+            <div class="submit-row">
+              <label>&nbsp;</label><input type="button" value="Log in" ng-click="login()"/>
+            </div>
+          </form>
+          <!-- <p>form = {{'{{user}'}}}</p> -->
+        </div>
+        
+        <br class="clear" />
+      </div>
+      <!-- END Content -->
+      <div id="footer"></div>
+    </div>
+    <!-- END Container -->
+  </body>
+<script type="text/javascript">
+  var app = angular.module('LoginApp', []);
+  app.controller('LoginCtrl', function($scope,$http,$window) {
+  //Check keypress is Enter
+  $scope.checkIfEnterKeyWasPressed = function($event){
+    var keyCode = $event.which || $event.keyCode;
+    if (keyCode === 13) {
+        $scope.login()
+    }
+  };
+
+    $scope.login = function () {
+      // console.log($scope.user);
+      $http({
+        method : 'POST',
+        url : '/accounts/login/',
+        data : $scope.user
+      }).then(function(response){
+        if(response.status == 203){
+          $window.alert(response.data.detail);
+        }
+        else
+          if (response.status == 202){
+            $window.location.href='/supervisord/';
+          }
+      });
+    }; 
+  });
+</script>
+</html>
