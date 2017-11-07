@@ -46,6 +46,8 @@ def log_out(request):
 @require_http_methods(['GET', 'POST'])
 @csrf_exempt
 def password_change(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/accounts/login')
     if request.method == 'POST':
         agrs = {}
         data = json.loads(request.body)
@@ -77,17 +79,21 @@ def password_change(request):
         messages = json.dumps(agrs)
         return HttpResponse(messages, content_type='application/json', status=202)
     else:
-        return render_to_response('accounts/password_change.html')
+        user = user_info(request)
+        return render_to_response('accounts/password_change.html', user)
 
 @require_http_methods(['GET', 'POST'])
 @csrf_exempt
 def profile(request):
-    return render_to_response('accounts/profile.html')
+    user = user_info(request)
+    return render_to_response('accounts/profile.html', user)
         
     
 
 @require_http_methods(['GET'])
 def profile_json(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/accounts/login')
     user = User.objects.get(pk=int(request.user.id))
     agrs = []
     agrs.append({

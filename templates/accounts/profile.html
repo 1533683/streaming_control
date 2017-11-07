@@ -2,21 +2,42 @@
 {% block content %}
 <div ng-app="ProfileApp" ng-controller="ProfileCtrl">
 	<h2>My Profile</h2>
-	<hr/>
-	Username: {{'{{profile.username}'}}}
-	<hr/>
-	Email: {{'{{profile.email}'}}}
-	<hr/>
-	First Name{{'{{profile.first_name}'}}}
-	<hr/>
-	Last Name{{'{{profile.last_name}'}}}
-	<hr/>
-	Staff status{{'{{profile.is_staff}'}}}
-	<hr/>
-	Date Joined{{'{{profile.date_joined}'}}}
-	<hr/>
-	Last Login{{'{{profile.last_login}'}}}
-	<hr/>
+
+	<div>
+		<span class="col-md-6">Username:</span>
+		<span class="col-md-5">{{'{{profile.username}'}}}</span>
+		<span class="col-md-1">edit</span>
+	</div>
+	<div>
+		<span class="col-md-6">Email:</span>
+		<span class="col-md-5">{{'{{profile.email}'}}}</span>
+		<span class="col-md-1">edit</span>
+	</div>
+	<div>
+		<span class="col-md-6">First Name:</span>
+		<span class="col-md-5">{{'{{profile.first_name}'}}}</span>
+		<span class="col-md-1">edit</span>
+	</div>
+	<div>
+		<span class="col-md-6">Last Name:</span>
+		<span class="col-md-5">{{'{{profile.last_name}'}}}</span>
+		<span class="col-md-1">edit</span>
+	</div>
+	<div>
+		<span class="col-md-6">Staff status:</span>
+		<span class="col-md-5">{{'{{profile.is_staff}'}}}</span>
+		<span class="col-md-1">edit</span>
+	</div>
+	<div>
+		<span class="col-md-6">Date Joined:</span>
+		<span class="col-md-5">{{'{{profile.date_joined}'}}}</span>
+		<span class="col-md-1">edit</span>
+	</div>
+	<div>
+		<span class="col-md-6">Last Login:</span>
+		<span class="col-md-5">{{'{{profile.last_login}'}}}</span>
+		<span class="col-md-1">edit</span>
+	</div>
 </div>
 <!-- END Container -->
 

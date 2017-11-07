@@ -107,3 +107,20 @@ MEDIA_ROOT = (
 BASE_DIR
 )
 MEDIA_URL = '/media/'
+
+SUPERVISORD_CONFIG = '/etc/supervisord.d/'
+EXTENTION = '.ini'
+SUPERVIDORD_SERVICES= '/etc/init.d/supervisord'
+SUPERVISORD_CONTROL= '/usr/bin/supervisorctl'
+
+YOUTUBE_SERVER = 'rtmp://a.rtmp.youtube.com/live2/'
+YOUTUBE_TEMPLATE = """[program:name]
+command=ffmpeg -i udp://ip -c:v copy -c:a copy -bsf:a aac_adtstoasc -f flv rtmp://a.rtmp.youtube.com/live2/streamkey
+redirect_stderr=true
+stdout_logfile= /var/log/supervisor/name.log"""
+
+FACEBOOK_SERVER = 'rtmp://rtmp-api.facebook.com:80/rtmp/'
+FACEBOOK_TEMPLATE = """[program:name]
+command=ffmpeg -i udp://ip -vcodec copy -acodec aac -ab 192k -strict -2 -preset fast -f flv rtmp://rtmp-api.facebook.com:80/rtmp/streamkey
+redirect stderr=true
+stdout_logfile= /var/log/supervisor/name.log"""

@@ -215,3 +215,13 @@ input:-ms-input-placeholder {
 input:-moz-placeholder {
  color: rgba(255,255,255,0.2);
 }
+.centeredImage {
+    position: absolute;
+    margin: auto;
+    left: 0; 
+    right: 0;
+    top: 0;
+    bottom: 0; 
+    vertical-align:middle;
+
+}

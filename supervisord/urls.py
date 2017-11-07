@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
-from django.views.generic import ListView, DetailView
 
 urlpatterns = patterns('',
     url(r'^$', 'supervisord.views.supervisord'),
+    url(r'^api/supervisord/$', 'supervisord.views.supervisord_json'),
+    url(r'^api/(?P<name>.+)/$', 'supervisord.views.action'),
 )

@@ -1,42 +1,36 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Portal</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <script type="text/javascript" src="/static/angular.min.js"></script>
-        <script type="text/javascript" src="/static/bootstrap/js/jquery-2.1.4.js"></script>
-        <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
-        
-        
-        <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-theme.min.css">
-        
-        <link rel="stylesheet" type="text/css" href="/static/style.css">
-        </script>
-        <style>
-        body {
-        padding-top: 60px;
-        padding-bottom: 60px;
-        font-size: 12 px;
-        } 
-        </style>
+      <meta charset="utf-8">
+      <title>Streaming Control</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script type="text/javascript" src="/static/angular.min.js"></script>
+      <script type="text/javascript" src="/static/jquery-2.1.4.js"></script>
+      <script type="text/javascript" src="/static/angular-ui/ui-bootstrap-tpls-0.11.0.min.js"></script>
+      <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-theme.min.css">
+      <link href="/static/css/signin.css" rel="stylesheet">
+      <script type="text/javascript" src="/static/main.js"></script>
+
+      <style>
+      body {
+      padding-top: 60px;
+      padding-bottom: 60px;
+      }
+      </style>
     </head>
     <body id="docbody">
         {% block nav %}
             {% include 'nav.html' %}
         {% endblock %}
         <div class="container">
-            <div>
-                {% block content %}
-                {% endblock %}
-            </div>
+          {% block content %}
+          {% endblock %}
         </div><!-- /.container -->
             
         <div class="container">
-            <div>
-            </div><!-- /.footer -->
         </div>
     </body>
 </html>
