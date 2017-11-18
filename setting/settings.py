@@ -114,13 +114,15 @@ SUPERVIDORD_SERVICES= '/etc/init.d/supervisord'
 SUPERVISORD_CONTROL= '/usr/bin/supervisorctl'
 
 YOUTUBE_SERVER = 'rtmp://a.rtmp.youtube.com/live2/'
-YOUTUBE_TEMPLATE = """[program:name]
-command=ffmpeg -i udp://ip -c:v copy -c:a copy -bsf:a aac_adtstoasc -f flv rtmp://a.rtmp.youtube.com/live2/streamkey
+YOUTUBE_TEMPLATE = """[program:[name]]
+command=ffmpeg -i udp://[source] -c:v copy -c:a copy -bsf:a aac_adtstoasc -f flv rtmp://a.rtmp.youtube.com/live2/[streamkey]
 redirect_stderr=true
-stdout_logfile= /var/log/supervisor/name.log"""
+stdout_logfile= /var/log/supervisor/[name].log
+#id: [streaming_id] owner: [owner_name] desc: [description]"""
 
 FACEBOOK_SERVER = 'rtmp://rtmp-api.facebook.com:80/rtmp/'
-FACEBOOK_TEMPLATE = """[program:name]
-command=ffmpeg -i udp://ip -vcodec copy -acodec aac -ab 192k -strict -2 -preset fast -f flv rtmp://rtmp-api.facebook.com:80/rtmp/streamkey
+FACEBOOK_TEMPLATE = """[program:[name]]
+command=ffmpeg -i udp://[source] -vcodec copy -acodec aac -ab 192k -strict -2 -preset fast -f flv rtmp://rtmp-api.facebook.com:80/rtmp/[streamkey]
 redirect stderr=true
-stdout_logfile= /var/log/supervisor/name.log"""
+stdout_logfile= /var/log/supervisor/[name].log
+#id: [streaming_id] owner: [owner_name] desc: [description]"""
