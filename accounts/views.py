@@ -72,9 +72,9 @@ def password_change(request):
             messages = json.dumps(agrs)
             return HttpResponse(messages, content_type='application/json', status=203)
         user = User.objects.get(pk=int(request.user.id))
-        user.set_password('root')
-        # users = user.save()
-        # update_session_auth_hash(request, users)
+        user.set_password(newpassword)
+        users = user.save()
+        #update_session_auth_hash(request, users)
         agrs["detail"] = "Password change sucessfuly!"
         messages = json.dumps(agrs)
         return HttpResponse(messages, content_type='application/json', status=202)
@@ -85,12 +85,39 @@ def password_change(request):
 @require_http_methods(['GET', 'POST'])
 @csrf_exempt
 def profile(request):
-    user = user_info(request)
-    return render_to_response('accounts/profile.html', user)
-        
-    
+    if request.method == 'GET':
+        user = user_info(request)
+        return render_to_response('accounts/profile.html', user)
+    agrs = {}
+    if request.method == 'POST':
+        user = User.objects.get(pk=int(request.user.id))
+        data = json.loads(request.body)
+        first_name = data['first_name'].strip()
+        last_name = data['last_name'].strip()
+        email = data['email'].strip()
+        flag = 0
+        if user.first_name != first_name:
+            user.first_name = first_name
+            flag = 1
+        if  user.last_name != last_name:
+            user.last_name = last_name
+            flag = 1
+        if user.email != email:
+            user.email = email
+            flag = 1
+        if flag:
+            user.save()
+            agrs["detail"] = "Profile change sucessfuly!"
+            messages = json.dumps(agrs)
+            return HttpResponse(messages, content_type='application/json', status=202)
+        agrs["detail"] = "Info! Profile no change."
+        messages = json.dumps(agrs)
+        return HttpResponse(messages, content_type='application/json', status=203)
+    agrs["detail"] = "Eror! unknow."
+    messages = json.dumps(agrs)
+    return HttpResponse(messages, content_type='application/json', status=203)
 
-@require_http_methods(['GET'])
+@require_http_methods(['GET', 'POST'])
 def profile_json(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/accounts/login')
@@ -107,4 +134,3 @@ def profile_json(request):
         'last_login'    : str(user.last_login)
         })
     return HttpResponse(json.dumps(agrs), content_type='application/json', status=200)
-    

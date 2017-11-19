@@ -206,6 +206,7 @@ def action(request, name):
 
 
 def history(request):
+    print request
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/accounts/login')
     history_list = History.objects.all().order_by('-date_time')[:200]
