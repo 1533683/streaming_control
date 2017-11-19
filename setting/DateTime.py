@@ -7,6 +7,12 @@ class DateTime:
     def conver_human_creadeble_2_unix_timetamp(self, date_time):
         return int(time.mktime(time.strptime(date_time, '%Y-%m-%d %H:%M:%S')))
 
+    def conver_human_creadeble_2_unix_timetamp_local(self, date_time):
+        date_time_pattern = re.compile("\d{4}[/.-]\d{2}[/.-]\d{2} \d{2}:\d{2}:\d{2}")
+        date_time_data = re.findall(date_time_pattern, date_time)
+        date_time = date_time_data[0]
+        return int(time.mktime(time.strptime(date_time, '%Y-%m-%d %H:%M:%S'))) - time.timezone
+
     def get_now(self):
         now = time.time()
         now_pattern = re.compile("\d+") 

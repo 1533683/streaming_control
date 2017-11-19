@@ -13,6 +13,7 @@ from django.shortcuts import render, redirect
 from accounts.models import *
 #hash password
 from django.contrib.auth.hashers import make_password
+from setting.DateTime import *
 
 
 @require_http_methods(['GET', 'POST'])
@@ -130,7 +131,7 @@ def profile_json(request):
         'last_name'     : user.last_name,
         'is_staff'      : user.is_staff,
         'is_active'     : user.is_active,
-        'date_joined'   : str(user.date_joined),
-        'last_login'    : str(user.last_login)
+        'date_joined'   : DateTime().conver_human_creadeble_2_unix_timetamp_local(str(user.date_joined)),
+        'last_login'    : DateTime().conver_human_creadeble_2_unix_timetamp_local(str(user.last_login))
         })
     return HttpResponse(json.dumps(agrs), content_type='application/json', status=200)
